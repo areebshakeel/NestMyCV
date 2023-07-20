@@ -7,4 +7,4 @@ export class Report{
 
     @Column()
     price:number
-}
+}  
