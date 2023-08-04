@@ -1,14 +1,17 @@
-import { Body, ClassSerializerInterceptor, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, Session, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, Session, UseGuards, UseInterceptors } from '@nestjs/common';
+import { AuthGuard } from 'src/guards/auth.guards';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { CurrentUser } from './dtos/current-user.decorator';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
+import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './user.entity';
 import { UserService } from './users.service';
 @Controller('auth')
 @Serialize(UserDto)
+@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
     constructor(private userService:UserService, private authService:AuthService){}
 
@@ -18,7 +21,8 @@ export class UsersController {
     // }
 
     @Get('/whoami')
-    async whoAmI (@CurrentUser() user:string){
+    @UseGuards(AuthGuard)
+    async whoAmI (@CurrentUser() user:User){
         return user;
     }
 
