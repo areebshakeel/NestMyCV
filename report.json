@@ -1,0 +1,15 @@
+{
+  "price": 500000,
+  "make": "Toyota",
+  "model": "Corolla",
+  "year": 1980,
+  "lng": 0,
+  "lat": 0,
+  "mileage": 100000,
+  "user": {
+    "id": 2,
+    "email": "areeb120@gmail.com",
+    "password": "731e81d85e74e1cc32.fbe12b123152b233eb08ed18d3a0d07a6f11cd81925973abbeb4b566a11f0a6f"
+  },
+  "id": 1
+}
